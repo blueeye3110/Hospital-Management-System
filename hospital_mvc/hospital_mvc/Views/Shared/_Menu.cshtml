@@ -1,0 +1,41 @@
+﻿<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        <strong>Menu</strong>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><button type="submit" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" class="btn"><i class="fa fa-home"></i> Home</button></li>
+        @if (User.IsInRole("Admin"))
+        {
+           
+
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("Index", "Staffs") + "'");"><i class="fa fa-users"></i> Staff</button></li>
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("Index", "Charges") + "'");"><i class="fa fa-dollar"></i> Charges</button></li>
+        }
+        @if (User.IsInRole("Doctor"))
+        {
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ViewProfile", "Staffs") + "'");"><i class="fa fa-user"></i> Profile</button></li>
+
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ShowAppointments", "Doctor") + "'");"><i class="fa fa-address-card"></i> Appointments</button></li>
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ShowPatients", "Doctor") + "'");"><i class="fa fa-users"></i> Patients</button></li>
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ShowCases", "Doctor") + "'");"><i class="fa fa-bar-chart"></i> Reports</button></li>
+        }
+        @if (User.IsInRole("Reception"))
+        {
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ViewProfile", "Staffs") + "'");"><i class="fa fa-user"></i> Profile</button></li>
+
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ShowPatients", "Receiptionist") + "'");"><i class="fa fa-users"></i> Patients</button></li>
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ShowWards", "Receiptionist") + "'");"><i class="fa fa-bed"></i> Wards</button></li>
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ShowCharges", "Receiptionist") + "'");"><i class="fa fa-dollar"></i> Charges</button></li>
+        }
+        @if (User.IsInRole("Patient"))
+        {
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ViewProfile", "Patient") + "'");"><i class="fa fa-user"></i> Profile</button></li>
+            
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ShowPatientCase", "Patient") + "'");"><i class="fa fa-stethoscope"></i> Cases</button></li>
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ShowCases", "Patient") + "'");"><i class="fa fa-bar-chart"></i> Reports</button></li>
+            <li class="list-group-item"><button class="btn" onclick="@("window.location.href='" + @Url.Action("ShowPatientBill", "Patient") + "'");"><i class="fa fa-dollar"></i> Billing</button></li>
+        }
+        <li class="list-group-item"><button type="submit" onclick="@("window.location.href='" + @Url.Action("About", "Home") + "'");" class="btn"><i class="fa fa-handshake-o"></i> About Us</button></li>
+        <li class="list-group-item"><button type="submit" onclick="@("window.location.href='" + @Url.Action("Contact", "Home") + "'");" class="btn"><i class="fa fa-envelope"></i> Contact Us</button></li>
+    </ul>
+</div>

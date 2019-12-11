@@ -1,0 +1,96 @@
+﻿@model IEnumerable<hospital_mvc.Models.Case>
+
+@{
+    ViewBag.Title = "ShowPatientCase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Error");
+            };
+    </script>
+}
+
+<h2>Patient Id - @ViewBag.patientId </h2>
+<h4><b>Cases</b></h4>
+<p>
+    <button type="button" onclick="@("window.location.href='" + @Url.Action("OpenNewCase", "Patient") + "'");" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-plus"></span> Open New Case
+    </button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.caseId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.opendate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.closedate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        var color = "#fff";
+        var isDisabled = false;
+        if (item.status == "open")
+        {
+            color = "lime";
+            isDisabled = false;
+        }
+        else if (item.status == "closed")
+        {
+            color = "white";
+            isDisabled = true;
+        }
+
+        <tr style="background-color: @color ">
+            <td>
+                @Html.DisplayFor(modelItem => item.caseId)
+            </td>
+            <td>
+                @if (item.opendate != null)
+                {
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.opendate))
+                }
+                @if (item.opendate == null)
+                {
+                    @Html.DisplayFor(modelItem => item.opendate)
+                }
+            </td>
+            <td>
+                @if (item.closedate != null)
+                {
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.closedate))
+                }
+                @if (item.closedate == null)
+                {
+                    @Html.DisplayFor(modelItem => item.closedate)
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                <button type="button" class="btn btn-info btn-sm" onclick="@("window.location.href='" + @Url.Action("BookAppointment", "Patient", new { id = item.caseId , patientId = ViewBag.patientId }) + "'");" disabled="@isDisabled">
+                    Book Appointment
+                </button>
+                <button type="button" class="btn btn-info btn-sm" onclick="@("window.location.href='" + @Url.Action("ViewAppointment", "Patient", new { id = item.caseId , patientId = ViewBag.patientId }) + "'");">
+                    View Appointments
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>
+

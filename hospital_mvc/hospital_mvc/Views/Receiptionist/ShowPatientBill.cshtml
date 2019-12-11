@@ -1,0 +1,107 @@
+﻿@model IEnumerable<hospital_mvc.Models.Case>
+
+@{
+    ViewBag.Title = "ShowPatientBill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Patient-Id : @ViewBag.patient </h2>
+<h4><b>Bills</b></h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.caseId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.opendate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.closedate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.due)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        var color = "#fff";
+        var isDisabled = false;
+        var close = false;
+        if (item.status == "open")
+        {
+            color = "lime";
+            isDisabled = false;
+            if(item.due != 0)
+            {
+                close = false;
+            }
+            else if(item.due == 0)
+            {
+                close = true;
+            }
+        }
+        else if (item.status == "closed")
+        {
+            color = "white";
+            isDisabled = true;
+            close = true;
+
+        }
+        <tr style="background-color: @color">
+            <td>
+                @Html.DisplayFor(modelItem => item.caseId)
+            </td>
+            <td>
+                @if (item.opendate != null)
+                {
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.opendate))
+                }
+                @if (item.opendate == null)
+                {
+                    @Html.DisplayFor(modelItem => item.opendate)
+                }
+            </td>
+            <td>
+                @if (item.closedate != null)
+                {
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.closedate))
+                }
+                @if (item.closedate == null)
+                {
+                    @Html.DisplayFor(modelItem => item.closedate)
+                }
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.bill)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.paid)
+            </td>
+            <td style="color:red">
+                @Html.DisplayFor(modelItem => item.due)
+            </td>
+            <td>
+                <button type="button" class="btn btn-info btn-sm" onclick="@("window.location.href='" + @Url.Action("AddCharge", "Receiptionist", new { id = item.caseId , patientId = ViewBag.Patient }) + "'");" disabled="@isDisabled">
+                    Add Charge
+                </button>
+                <button type="button" class="btn btn-info btn-sm" onclick="@("window.location.href='" + @Url.Action("ShowAddedCharges", "Receiptionist", new { id = item.caseId , patientId = ViewBag.Patient }) + "'");">
+                    Show Charges
+                </button>
+                <button type="button" class="btn btn-info btn-sm" onclick="@("window.location.href='" + @Url.Action("PayBill", "Receiptionist", new { id = item.caseId , patientId = ViewBag.Patient , due = item.due }) + "'");" disabled="@close">
+                    Pay Bill
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>

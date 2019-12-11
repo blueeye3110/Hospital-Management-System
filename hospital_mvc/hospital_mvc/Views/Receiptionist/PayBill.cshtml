@@ -1,0 +1,56 @@
+﻿@model hospital_mvc.Models.Case
+
+@{
+    ViewBag.Title = "PayBill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bill Payment</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Due Amount : @ViewBag.due </h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.Label(" Id :", "Patient Id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" class="form-control" name="patientId" value="@ViewBag.patientId" readonly="readonly" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Case Id :", "Case Id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" class="form-control" name="caseId" value="@ViewBag.caseId" readonly="readonly" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Amount", "Amount", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="number" class="form-control" name="amount" max="@ViewBag.due" />
+            @Html.ValidationMessageFor(model => model.paid, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Pay Now" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

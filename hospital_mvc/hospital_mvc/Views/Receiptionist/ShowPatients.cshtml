@@ -1,0 +1,53 @@
+﻿@model IEnumerable<hospital_mvc.Models.Patient>
+
+@{
+    ViewBag.Title = "ShowPatients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ApoloCare</h2>
+<h4><b>Patients</b></h4>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.patientId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emailId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.contactNo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.patientId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emailId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contactNo)
+        </td>
+        <td>
+            <button type="button" class="btn btn-info btn-sm" onclick="@("window.location.href='" + @Url.Action("ShowPatientCase", "Receiptionist", new { id = item.patientId }) + "'");">
+                View Cases
+            </button>
+            <button type="button" class="btn btn-info btn-sm" onclick="@("window.location.href='" + @Url.Action("ShowPatientBill", "Receiptionist", new { id = item.patientId }) + "'");">
+                View Bills
+            </button>
+        </td>
+    </tr>
+}
+
+</table>

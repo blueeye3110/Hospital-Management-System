@@ -1,0 +1,10 @@
+﻿#logo {
+    height: 100%;
+    width: 100%;
+    margin-top: -15px;
+}
+
+/* Only for snippet */
+.double-nav .breadcrumb-dn {
+    color: #fff;
+}

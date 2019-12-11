@@ -1,0 +1,66 @@
+﻿@model IEnumerable<hospital_mvc.Models.Staff>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Staff-Members</h2>
+
+<p>
+    <button type="button" onclick="@("window.location.href='" + @Url.Action("RegisterStaff", "Account") + "'");" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-plus"></span> Add New Member
+    </button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.staffId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emailId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dept)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.type)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.staffId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emailId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dept)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type)
+        </td>
+        <td>
+            <button type="button" onclick="@("window.location.href='" + @Url.Action("Edit", "Staffs", new { id = item.staffId }) + "'");" class="btn btn-info btn-sm">
+                Edit
+            </button>
+            <button type="button" onclick="@("window.location.href='" + @Url.Action("Details", "Staffs", new { id = item.staffId }) + "'");" class="btn btn-primary btn-sm">
+                Details
+            </button>
+            <button type="button" onclick="@("window.location.href='" + @Url.Action("Delete", "Staffs", new { id = item.staffId }) + "'");" class="btn btn-danger btn-sm">
+                Delete
+            </button>
+        </td>
+    </tr>
+}
+
+</table>

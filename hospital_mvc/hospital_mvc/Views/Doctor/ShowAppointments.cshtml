@@ -1,0 +1,89 @@
+﻿@model IEnumerable<hospital_mvc.Models.Appointment>
+
+@{
+    ViewBag.Title = "ViewAppointments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Doctor-ID : @ViewBag.staffId</h2>
+
+<p>
+<b>Appointments</b>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.appID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.patientname)
+        </th>
+        <th>
+            <b>Case Status</b>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    var color = "#fff";
+    var isDisabled = false;
+    var close = false;
+    if(item.Case.status == "open")
+    {
+        if (item.status == "Not Conducted")
+        {
+            color = "lime";
+            isDisabled = false;
+            close = false;
+        }
+        else if (item.status == "Conducted")
+        {
+            color = "white";
+            isDisabled = true;
+            close = true;
+        }
+        
+    }
+    else if(item.Case.status == "closed")
+    {
+        color = "white";
+        isDisabled = true;
+        close = true;
+    }
+    <tr style="background-color: @color">
+        <td>
+            @Html.DisplayFor(modelItem => item.appID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.patientname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Case.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            <button type="button" class="btn btn-info btn-sm" onclick="@("window.location.href='" + @Url.Action("EditAppointmentDetails", "Doctor", new { id = item.appID }) + "'");" disabled="@close">
+                Edit Details
+            </button>
+            <button type="button" class="btn btn-info btn-sm" onclick="@("window.location.href='" + @Url.Action("ShowAppointmentDetails", "Doctor", new { id = item.appID }) + "'");" >
+                Show Details
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="@("window.location.href='" + @Url.Action("CloseAppointment", "Doctor", new { id = item.appID }) + "'");" disabled="@isDisabled">
+                Close
+            </button>
+        </td>
+    </tr>
+}
+
+</table>

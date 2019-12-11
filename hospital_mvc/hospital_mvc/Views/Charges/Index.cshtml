@@ -1,0 +1,48 @@
+﻿@model IEnumerable<hospital_mvc.Models.Charge>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Charges</h2>
+
+<p>
+    <button type="button" onclick="@("window.location.href='" + @Url.Action("Create", "Charges") + "'");" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-plus"></span> Add New Charge
+    </button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.amount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.amount)
+        </td>
+        <td>
+            <button type="button" onclick="@("window.location.href='" + @Url.Action("Edit", "Charges", new { id = item.chargeID }) + "'");" class="btn btn-info btn-sm">
+                Edit
+            </button>
+            <button type="button" onclick="@("window.location.href='" + @Url.Action("Details", "Charges", new { id = item.chargeID }) + "'");" class="btn btn-primary btn-sm">
+                Details
+            </button>
+            <button type="button" onclick="@("window.location.href='" + @Url.Action("Delete", "Charges", new { id = item.chargeID }) + "'");" class="btn btn-danger btn-sm">
+                Delete
+            </button>
+        </td>
+    </tr>
+}
+
+</table>

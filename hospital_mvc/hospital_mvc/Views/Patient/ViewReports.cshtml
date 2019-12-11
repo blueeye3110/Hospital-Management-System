@@ -1,0 +1,58 @@
+﻿@model IEnumerable<hospital_mvc.Models.Report>
+
+@{
+    ViewBag.Title = "ViewReports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Case-ID: @ViewBag.caseId </h2>
+
+<p>
+<b>Reports</b>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.reportId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.uploadedBy)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.reportId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.uploadedBy)
+            </td>
+            <td>
+                <button type="button" class="btn btn-info btn-sm" onclick="@("window.location.href='" + @Url.Action("DownloadReport", "Patient", new { id = item.reportId , caseId = ViewBag.caseId }) + "'");">
+                    View Report
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-brand">
+
+                <a class="navbar-brand"><img id="logo" alt="" src="~/Content/App/logo.ico" /></a>
+                <!-- Logo Text -->
+                <span class="font-weight-bold">ApoloCare</span>
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <table class="table table-borderless">
+            
+                <tbody>
+                    <tr>
+                        <td width="100px"class="align-baseline">@Html.Partial("_Menu")</td>
+                        <td class="align-top">@RenderBody()</td>
+
+                    </tr>
+                </tbody>
+        </table>
+        
+        
+        <hr />
+        <!-- Footer -->
+        <footer class="page-footer font-small teal pt-4">
+
+            <!-- Footer Text -->
+            <div class="myfooter1">
+                <div class="container-fluid text-center text-md-left">
+
+                    <!-- Grid row -->
+                    <div class="row">
+
+                        
+                        <!-- Grid column -->
+                        <!-- Grid column -->
+                        
+
+                            <!-- Content -->
+                            <h5 class="text-uppercase font-weight-bold text-center">Developed By:</h5>
+                            <p class="text-center">
+                                Harsh Vaghasiya<br />
+                                Viral Gajera<br />
+                                Sani Ranpariya<br />
+                            </p>
+
+                        
+                        <!-- Grid column -->
+
+                    </div>
+                    <!-- Grid row -->
+
+                </div>
+            </div>
+                <!-- Footer Text -->
+                <!-- Copyright -->
+                <div class="myfooter2 text-center">
+                    <div class="footer-copyright text-center py-3">
+                        © 2019 Copyright:
+                        <a href="https://mdbootstrap.com/education/bootstrap/">ApoloCare.Com</a>
+                    </div>
+                </div>
+                <!-- Copyright -->
+
+</footer>
+        <!-- Footer -->
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
